@@ -1,0 +1,101 @@
+rank,domain,categories
+1,google.com,Search Engines
+2,googleapis.com,Information Technology;Content Servers
+3,gstatic.com,Content Servers
+4,facebook.com,Social Networks
+5,microsoft.com,Information Technology;Business
+6,apple.com,Information Technology;Technology
+7,cloudflare.com,Technology
+8,youtube.com,Video Streaming
+9,whatsapp.net,Instant Messengers;Internet Phone & VOIP
+10,instagram.com,Social Networks
+11,tiktokcdn.com,Content Servers;Social Networks
+12,googlevideo.com,Search Engines;Video Streaming
+13,tiktokv.com,Social Networks;Video Streaming
+14,fbcdn.net,Social Networks
+15,doubleclick.net,Advertisements
+16,akadns.net,Content Servers
+17,amazonaws.com,Technology
+18,gvt2.com,Content Servers
+19,akamaiedge.net,Content Servers
+20,bing.com,Search Engines
+21,live.com,Technology;Webmail
+22,office.com,Business
+23,apple-dns.net,Content Servers
+24,akamai.net,Content Servers
+25,ip-api.com,Technology
+26,googleusercontent.com,Content Servers
+27,qq.com,News & Media
+28,whatsapp.com,Instant Messengers;Internet Phone & VOIP
+29,icloud.com,File Sharing;Content Servers
+30,aaplimg.com,Information Technology;Content Servers;Technology
+31,ytimg.com,Content Servers
+32,googlesyndication.com,Search Engines;Advertisements
+33,ntp.org,Technology;Government/Legal
+34,cloudflare-dns.com,Content Servers
+35,baidu.com,Search Engines
+36,google-analytics.com,Business;Technology
+37,shopee.com.my,Ecommerce
+38,tabacodeliarbarato.es,CIPA Filter;Shopping;Compromised Domain;Tobacco
+39,tiktok.com,Social Networks;Video Streaming
+40,dns.google,Information Technology
+41,spotify.com,Audio Streaming
+42,msn.com,News & Media
+43,googletagmanager.com,Content Servers
+44,cloudfront.net,Content Servers;Science;Technology
+45,douyincdn.com,Content Servers
+46,digicert.com,Information Security
+47,windowsupdate.com,Information Technology;Business
+48,azure.com,Technology
+49,googleadservices.com,Advertisements
+50,office.net,Content Servers
+51,aliyuncs.com,Content Servers
+52,google.com.my,Search Engines
+53,fastly.net,Information Security;Information Technology;Technology
+54,yahoo.com,News & Media
+55,chatgpt.com,Artificial Intelligence;Chat
+56,alicdn.com,Content Servers
+57,windows.com,Information Technology
+58,appsflyersdk.com,Content Servers;APIs
+59,clarity.ms,Content Servers
+60,zijieapi.com,Content Servers
+61,amazon.com,Ecommerce
+62,netflix.com,Movies;Video Streaming
+63,microsoftonline.com,Technology
+64,cdninstagram.com,Content Servers
+65,steamserver.net,Gaming;Content Servers
+66,taobao.com,Ecommerce
+67,byteoversea.com,Content Servers
+68,ggpht.com,Content Servers
+69,xiaohongshu.com,Video Streaming
+70,xhscdn.com,Content Servers
+71,avast.com,Technology
+72,app-analytics-services.com,Content Servers
+73,trafficmanager.net,Information Technology;Content Servers
+74,gmail.com,Webmail
+75,akamaized.net,Content Servers
+76,skype.com,Instant Messengers;Internet Phone & VOIP
+77,gvt1.com,Content Servers
+78,linkedin.com,Professional Networking
+79,msftncsi.com,Content Servers
+80,amemv.com,Shareware/Freeware
+81,app-measurement.com,APIs
+82,criteo.com,Business
+83,msftconnecttest.com,Content Servers
+84,sentry.io,Business
+85,windows.net,Technology
+86,ibyteimg.com,Content Servers
+87,shopeemobile.com,Ecommerce
+88,cloudflareinsights.com,Technology
+89,vivo.com.cn,Technology
+90,twimg.com,Content Servers
+91,pubmatic.com,Business;Technology
+92,nr-data.net,Content Servers
+93,github.com,Technology
+94,amazon-adsystem.com,Advertisements
+95,pki.goog,Information Security
+96,adtrafficquality.google,Information Security
+97,cdn-apple.com,Content Servers
+98,tencent.com,Technology
+99,office365.com,Technology
+100,taboola.com,Business;Advertisements
