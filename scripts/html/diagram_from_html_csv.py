@@ -5,8 +5,8 @@ from pathlib import Path
 # -----------------------------
 # Pfade
 # -----------------------------
-csv_path = Path("..") / "csv" / "html" / "html_analysis_results.csv"
-charts_path = Path("..") / "charts" / "html"
+csv_path = Path("../../csv/html/html_analysis_results.csv")
+charts_path = Path("../../charts/html")
 charts_path.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------

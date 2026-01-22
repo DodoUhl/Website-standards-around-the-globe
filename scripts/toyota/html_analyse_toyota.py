@@ -102,7 +102,7 @@ def create_comparison_charts(df):
     # generische Diagramme
     # -------------------
     for col in numeric_cols:
-        plt.figure(figsize=(16, 6)) 
+        plt.figure(figsize=(8, 6)) 
         sorted_df = df.sort_values(by=col, ascending=False) 
         plt.barh(sorted_df["Land"], sorted_df[col]) 
         plt.gca().invert_yaxis() 
@@ -110,7 +110,7 @@ def create_comparison_charts(df):
         plt.xlabel("Wert") 
         plt.ylabel("Land") 
         plt.tight_layout() 
-        file_path = Path("..") / "charts" / "toyota" / f"toyota_{col}.png"
+        file_path = Path(f"../../charts/toyota/toyota_{col}.png")
         plt.savefig(file_path, dpi=300) 
         plt.close()
 
@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
     create_comparison_charts(df)
 
-    file_path = Path("..") / "csv" / "toyota" / "toyota_compare.csv"
+    file_path = Path("../../csv/toyota/toyota_compare.csv")
     df.to_csv(file_path, index=False)
     print("CSV gespeichert")
     print("Diagramme gespeichert")

@@ -10,9 +10,9 @@ from minio import Minio
 # -----------------------------
 # CSV einlesen
 # -----------------------------
-file_path = Path("..") / "domain_lists" / "current.csv"
+file_path = Path("../../domain_lists/current.csv")
 df = pd.read_csv(file_path)
-file_path = Path("..") / "csv" / "screenshot" / "crawler_minio_screenshots.csv"
+file_path = Path("../../csv/screenshot/crawler_minio_screenshots.csv")
 df_png = pd.read_csv(file_path, sep=";")
 processed_bases = set(df_png["domain"])
 # -----------------------------

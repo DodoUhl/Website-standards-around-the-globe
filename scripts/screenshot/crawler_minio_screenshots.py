@@ -27,7 +27,7 @@ subprocess.run([
 # -----------------------------
 # CSV einlesen
 # -----------------------------
-file_path = Path("..") / "domain_lists" / "current.csv"
+file_path = Path("../../domain_lists/current.csv")
 df = pd.read_csv(file_path)
 
 # -----------------------------
@@ -164,6 +164,6 @@ for obj in client.list_objects(bucket_screenshot, recursive=True):
 # CSV schreiben
 # -----------------------------
 df_out = pd.DataFrame(rows)
-file_path = Path("..") / "csv" / "screenshot" / "crawler_minio_screenshots.csv"
+file_path = Path("../../csv/screenshot/crawler_minio_screenshots.csv")
 df_out.to_csv(file_path, index=False)
 print("CSV erstellt")

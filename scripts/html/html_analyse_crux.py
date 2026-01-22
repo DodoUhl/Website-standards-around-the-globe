@@ -64,7 +64,7 @@ subprocess.run([
 # -----------------------------
 # CSV einlesen
 # -----------------------------
-file_path = Path("..") / "domain_lists" / "current.csv"
+file_path = Path("../../domain_lists/current.csv")
 df = pd.read_csv(file_path)
 
 # -----------------------------
@@ -120,7 +120,7 @@ for country, tlds in countries_tlds.items():
 # -----------------------------
 # HTML Analyse + CSV schreiben
 # -----------------------------
-output_file = Path("..") / "csv" / "html" / "html_analysis_results.csv"
+output_file = Path("../../csv/html/html_analysis_results.csv")
 write_header = not output_file.exists()
 
 done_domains = set()
@@ -173,7 +173,7 @@ with open(output_file, "a", newline="", encoding="utf-8") as csvfile:
                 continue
             
             safe_domain = domain.replace("/", "_").replace(":", "_")
-            html_file_path = Path("..") / "html" / f"{country}_{safe_domain}.html"
+            html_file_path = Path(f"../../html/{country}_{safe_domain}.html")
             with open(html_file_path, "w", encoding="utf-8") as f:
                 f.write(downloaded_html)
 
@@ -217,7 +217,7 @@ bucket_html = "html-crux"
 if not client.bucket_exists(bucket_html):
     client.make_bucket(bucket_html)
 
-for html in Path("../html").glob("*.html"):
+for html in Path("../../html").glob("*.html"):
     client.fput_object(
         bucket_html,
         html.name,
