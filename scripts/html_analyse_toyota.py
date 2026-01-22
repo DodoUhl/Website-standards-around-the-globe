@@ -5,7 +5,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 import pandas as pd
-import os
 import re
 
 # ----------------------------------------
@@ -81,14 +80,13 @@ def analyze_html(url):
     info = {
         "URL": url,
         "Land": url_to_country[url],
-        "Kanonische HTML Größe (KB)": round(len(re.sub(r"\s+", " ", soup.encode(formatter="minimal").decode()).strip()) / 1024, 2),
-        "Download HTML Größe (KB)": round(len(response.text) / 1024, 2),
-        "Anzahl <meta>": len(soup.find_all("meta")),
-        "Anzahl <script>": len(soup.find_all("script")),
-        "Anzahl <link>": len(soup.find_all("link")),
-        "Anzahl <img>": img_tags_count,
-        "Gesamt Bilder": total_images,
-        "Anzahl Zeichen": clean_text
+        "canonical_HTML_size": round(len(re.sub(r"\s+", " ", soup.encode(formatter="minimal").decode()).strip()) / 1024, 2),
+        "downloaded_HTML_size": round(len(response.text) / 1024, 2),
+        "number_of_meta_tags": len(soup.find_all("meta")),
+        "number_of_script_tags": len(soup.find_all("script")),
+        "number_of_link_tags": len(soup.find_all("link")),
+        "total_images": total_images,
+        "character_count": len(clean_text)
     }
 
     return info
@@ -112,30 +110,9 @@ def create_comparison_charts(df):
         plt.xlabel("Wert") 
         plt.ylabel("Land") 
         plt.tight_layout() 
-        file_path = Path("..") / "charts" / f"{col.replace('<','').replace('>','')}.png"
+        file_path = Path("..") / "charts" / "toyota" / f"toyota_{col}.png"
         plt.savefig(file_path, dpi=300) 
         plt.close()
-
-    # -------------------
-    # Bilderdiagramm
-    # -------------------
-    sorted_idx = df["Gesamt Bilder"].argsort()[::-1]
-    y_sorted = df["Land"].iloc[sorted_idx]
-    x_img_sorted = df["Anzahl <img>"].iloc[sorted_idx]
-    x_files_sorted = df["Bilddateien"].iloc[sorted_idx]
-    x_datauri_sorted = df["Data-URI Bilder"].iloc[sorted_idx]
-
-    plt.figure(figsize=(12, 7))
-    plt.barh(y_sorted, x_img_sorted, label="<img>-Tags")
-    plt.barh(y_sorted, x_files_sorted, left=x_img_sorted, label="Bilddateien")
-    plt.barh(y_sorted, x_datauri_sorted, left=x_img_sorted + x_files_sorted, label="Data-URI Bilder")
-    plt.gca().invert_yaxis()
-    plt.xlabel("Anzahl Bilder")
-    plt.title("Vergleich: <img>-Tags, Bilddateien, Data-URI Bilder")
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig("charts/Vergleich_Bilder.png", dpi=300)
-    plt.close()
 
 
 # ----------------------------------------
@@ -147,7 +124,7 @@ if __name__ == "__main__":
 
     create_comparison_charts(df)
 
-    file_path = Path("..") / "csv" / "toyota_compare.csv"
-    df.to_csv("file_path", index=False)
+    file_path = Path("..") / "csv" / "toyota" / "toyota_compare.csv"
+    df.to_csv(file_path, index=False)
     print("CSV gespeichert")
     print("Diagramme gespeichert")

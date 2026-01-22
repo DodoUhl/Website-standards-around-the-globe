@@ -7,7 +7,7 @@ from pathlib import Path
 # -----------------------------
 # CSV einlesen
 # -----------------------------
-file_path = Path("..") / "csv" / "all_screenshots.csv"
+file_path = Path("..") / "csv" / "screenshot" / "all_screenshots.csv"
 df = pd.read_csv(file_path, sep=";")
 
 # -----------------------------
@@ -51,7 +51,7 @@ plt.xlabel("Durchschnittliche Screenshot-Größe (KiB)")
 plt.ylabel("Land")
 plt.title("Durchschnittliche Screenshot-Größe pro Land")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_size_per_country.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_size_per_country.png"
 plt.savefig(file_path)
 plt.close()
 
@@ -64,7 +64,7 @@ plt.xlabel("Durchschnittliche Screenshot-Breite (Pixel)")
 plt.ylabel("Land")
 plt.title("Durchschnittliche Screenshot-Breite pro Land")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_width_per_country.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_width_per_country.png"
 plt.savefig(file_path)
 plt.close()
 
@@ -77,7 +77,7 @@ plt.xlabel("Durchschnittliche Screenshot-Höhe (Pixel)")
 plt.ylabel("Land")
 plt.title("Durchschnittliche Screenshot-Höhe pro Land")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_height_per_country.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_height_per_country.png"
 plt.savefig(file_path)
 plt.close()
 
@@ -90,7 +90,7 @@ plt.xlabel("Durchschnittliche Bilddichte (KiB)")
 plt.ylabel("Land")
 plt.title("Bilddichte von Webseiten-Screenshots pro Land")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_density_per_country.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_density_per_country.png"
 plt.savefig(file_path)
 plt.close()
 
@@ -126,7 +126,7 @@ plt.xlabel("Durchschnittliche Screenshot-Größe (KiB)")
 plt.ylabel("Kontinent")
 plt.title("Durchschnittliche Screenshot-Größe pro Kontinent")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_size_per_continent.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_size_per_continent.png"
 plt.savefig(file_path)
 plt.close()
 
@@ -139,7 +139,7 @@ plt.xlabel("Durchschnittliche Screenshot-Breite (Pixel)")
 plt.ylabel("Kontinent")
 plt.title("Durchschnittliche Screenshot-Breite pro Kontinent")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_width_per_continent.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_width_per_continent.png"
 plt.savefig(file_path)
 plt.close()
 
@@ -152,7 +152,7 @@ plt.xlabel("Durchschnittliche Screenshot-Höhe (Pixel)")
 plt.ylabel("Kontinent")
 plt.title("Durchschnittliche Screenshot-Höhe pro Kontinent")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_height_per_continent.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_height_per_continent.png"
 plt.savefig(file_path)
 plt.close()
 
@@ -165,7 +165,7 @@ plt.xlabel("Durchschnittliche Bilddichte (KiB)")
 plt.ylabel("Kontinent")
 plt.title("Durchschnittliche Bilddichte pro Kontinent")
 plt.tight_layout()
-file_path = Path("..") / "charts" / "avg_screenshot_density_per_continent.png"
+file_path = Path("..") / "charts" / "screenshot" / "avg_screenshot_density_per_continent.png"
 plt.savefig(file_path)
 plt.close()
 

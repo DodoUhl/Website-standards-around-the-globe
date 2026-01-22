@@ -113,7 +113,7 @@ for obj in objects:
 # CSV schreiben
 # -------------------------
 df = pd.DataFrame(rows)
-file_path = Path("..") / "csv" / "own_minio_screenshots.csv"
+file_path = Path("..") / "csv" / "screenshot" / "own_minio_screenshots.csv"
 df.to_csv(file_path, index=False)
 print("CSV erstellt")
 

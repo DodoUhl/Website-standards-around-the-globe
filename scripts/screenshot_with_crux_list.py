@@ -12,7 +12,7 @@ from minio import Minio
 # -----------------------------
 file_path = Path("..") / "domain_lists" / "current.csv"
 df = pd.read_csv(file_path)
-file_path = Path("..") / "csv" / "crawler_minio_screenshots.csv"
+file_path = Path("..") / "csv" / "screenshot" / "crawler_minio_screenshots.csv"
 df_png = pd.read_csv(file_path, sep=";")
 processed_bases = set(df_png["domain"])
 # -----------------------------
@@ -156,11 +156,22 @@ def save_results(results):
 # Screenshots löschen
 # -----------------------------
 def delete_screenshots(results):
+    folders_to_check = set()
+
     for item in results:
-        if item and item["file_path"]:
+        if item and item.get("file_path"):
             path = Path(item["file_path"])
-            if path.exists():
+
+            if path.exists() and path.is_file():
+                folders_to_check.add(path.parent)
                 path.unlink()
+
+    # Leere Ordner löschen
+    for folder in folders_to_check:
+        try:
+            folder.rmdir()
+        except OSError:
+            pass
     print("Alle Screenshots wurden gelöscht.")
 
 # -----------------------------
