@@ -1,0 +1,144 @@
+SELECT
+    continent,
+    country,
+    request_url,
+    request_duration
+FROM (
+    SELECT
+        request_url,
+        time AS request_duration,
+        CASE
+            -- Europa
+            WHEN request_url LIKE '%.de%' THEN 'Deutschland'
+            WHEN request_url LIKE '%.fr%' THEN 'Frankreich'
+            WHEN request_url LIKE '%.uk%' THEN 'UK'
+            WHEN request_url LIKE '%.it%' THEN 'Italien'
+            WHEN request_url LIKE '%.es%' THEN 'Spanien'
+            WHEN request_url LIKE '%.nl%' THEN 'Niederlande'
+            WHEN request_url LIKE '%.pl%' THEN 'Polen'
+            WHEN request_url LIKE '%.se%' THEN 'Schweden'
+            WHEN request_url LIKE '%.be%' THEN 'Belgien'
+            WHEN request_url LIKE '%.at%' THEN 'Österreich'
+
+            -- Asien
+            WHEN request_url LIKE '%.jp%' THEN 'Japan'
+            WHEN request_url LIKE '%.cn%' THEN 'China'
+            WHEN request_url LIKE '%.in%' THEN 'Indien'
+            WHEN request_url LIKE '%.kr%' THEN 'Südkorea'
+            WHEN request_url LIKE '%.sg%' THEN 'Singapur'
+            WHEN request_url LIKE '%.th%' THEN 'Thailand'
+            WHEN request_url LIKE '%.ae%' THEN 'VAE'
+            WHEN request_url LIKE '%.my%' THEN 'Malaysia'
+            WHEN request_url LIKE '%.ph%' THEN 'Philippinen'
+            WHEN request_url LIKE '%.il%' THEN 'Israel'
+
+            -- Afrika
+            WHEN request_url LIKE '%.za%' THEN 'Südafrika'
+            WHEN request_url LIKE '%.ng%' THEN 'Nigeria'
+            WHEN request_url LIKE '%.eg%' THEN 'Ägypten'
+            WHEN request_url LIKE '%.ke%' THEN 'Kenia'
+            WHEN request_url LIKE '%.ma%' THEN 'Marokko'
+            WHEN request_url LIKE '%.gh%' THEN 'Ghana'
+            WHEN request_url LIKE '%.tz%' THEN 'Tansania'
+            WHEN request_url LIKE '%.ug%' THEN 'Uganda'
+            WHEN request_url LIKE '%.sn%' THEN 'Senegal'
+            WHEN request_url LIKE '%.tn%' THEN 'Tunesien'
+
+            -- Nordamerika
+            WHEN request_url LIKE '%.us%' THEN 'USA'
+            WHEN request_url LIKE '%.ca%' THEN 'Kanada'
+            WHEN request_url LIKE '%.mx%' THEN 'Mexiko'
+            WHEN request_url LIKE '%.gt%' THEN 'Guatemala'
+            WHEN request_url LIKE '%.cr%' THEN 'Costa Rica'
+            WHEN request_url LIKE '%.pa%' THEN 'Panama'
+            WHEN request_url LIKE '%.do%' THEN 'Dominikanische Republik'
+            WHEN request_url LIKE '%.hn%' THEN 'Honduras'
+            WHEN request_url LIKE '%.sv%' THEN 'El Salvador'
+            WHEN request_url LIKE '%.ni%' THEN 'Nicaragua'
+
+            -- Südamerika
+            WHEN request_url LIKE '%.br%' THEN 'Brasilien'
+            WHEN request_url LIKE '%.ar%' THEN 'Argentinien'
+            WHEN request_url LIKE '%.cl%' THEN 'Chile'
+            WHEN request_url LIKE '%.pe%' THEN 'Peru'
+            WHEN request_url LIKE '%.co%' THEN 'Kolumbien'
+            WHEN request_url LIKE '%.ve%' THEN 'Venezuela'
+            WHEN request_url LIKE '%.bo%' THEN 'Bolivien'
+            WHEN request_url LIKE '%.ec%' THEN 'Ecuador'
+            WHEN request_url LIKE '%.py%' THEN 'Paraguay'
+            WHEN request_url LIKE '%.uy%' THEN 'Uruguay'
+
+            -- Ozeanien
+            WHEN request_url LIKE '%.au%' THEN 'Australien'
+            WHEN request_url LIKE '%.nz%' THEN 'Neuseeland'
+            WHEN request_url LIKE '%.ws%' THEN 'Samoa'
+            WHEN request_url LIKE '%.to%' THEN 'Tonga'
+            WHEN request_url LIKE '%.nu%' THEN 'Niue'
+            WHEN request_url LIKE '%.pw%' THEN 'Palau'
+            WHEN request_url LIKE '%.fm%' THEN 'Mikronesien'
+            WHEN request_url LIKE '%.tv%' THEN 'Tuvalu'
+
+            ELSE 'Unbekannt'
+        END AS country,
+        CASE
+            WHEN request_url LIKE '%.de%' OR request_url LIKE '%.fr%' OR request_url LIKE '%.uk%' OR
+                 request_url LIKE '%.it%' OR request_url LIKE '%.es%' OR request_url LIKE '%.nl%' OR
+                 request_url LIKE '%.pl%' OR request_url LIKE '%.se%' OR request_url LIKE '%.be%' OR
+                 request_url LIKE '%.at%' THEN 'Europa'
+
+            WHEN request_url LIKE '%.jp%' OR request_url LIKE '%.cn%' OR request_url LIKE '%.in%' OR
+                 request_url LIKE '%.kr%' OR request_url LIKE '%.sg%' OR request_url LIKE '%.th%' OR
+                 request_url LIKE '%.ae%' OR request_url LIKE '%.my%' OR request_url LIKE '%.ph%' OR
+                 request_url LIKE '%.il%' THEN 'Asien'
+
+            WHEN request_url LIKE '%.za%' OR request_url LIKE '%.ng%' OR request_url LIKE '%.eg%' OR
+                 request_url LIKE '%.ke%' OR request_url LIKE '%.ma%' OR request_url LIKE '%.gh%' OR
+                 request_url LIKE '%.tz%' OR request_url LIKE '%.ug%' OR request_url LIKE '%.sn%' OR
+                 request_url LIKE '%.tn%' THEN 'Afrika'
+
+            WHEN request_url LIKE '%.us%' OR request_url LIKE '%.ca%' OR request_url LIKE '%.mx%' OR
+                 request_url LIKE '%.gt%' OR request_url LIKE '%.cr%' OR request_url LIKE '%.pa%' OR
+                 request_url LIKE '%.do%' OR request_url LIKE '%.hn%' OR request_url LIKE '%.sv%' OR
+                 request_url LIKE '%.ni%' THEN 'Nordamerika'
+
+            WHEN request_url LIKE '%.br%' OR request_url LIKE '%.ar%' OR request_url LIKE '%.cl%' OR
+                 request_url LIKE '%.pe%' OR request_url LIKE '%.co%' OR request_url LIKE '%.ve%' OR
+                 request_url LIKE '%.bo%' OR request_url LIKE '%.ec%' OR request_url LIKE '%.py%' OR
+                 request_url LIKE '%.uy%' THEN 'Südamerika'
+
+            WHEN request_url LIKE '%.au%' OR request_url LIKE '%.nz%' OR request_url LIKE '%.ws%' OR
+                 request_url LIKE '%.to%' OR request_url LIKE '%.nu%' OR request_url LIKE '%.pw%' OR
+                 request_url LIKE '%.fm%' OR request_url LIKE '%.tv%' THEN 'Ozeanien'
+
+            ELSE 'Unbekannt'
+        END AS continent
+    FROM `browser-crawler`.har_entries
+    WHERE response_status = 200
+      AND response_content_type LIKE 'text/html%'
+      AND (
+          request_url LIKE '%.de%' OR request_url LIKE '%.fr%' OR request_url LIKE '%.uk%' OR
+          request_url LIKE '%.it%' OR request_url LIKE '%.es%' OR request_url LIKE '%.nl%' OR
+          request_url LIKE '%.pl%' OR request_url LIKE '%.se%' OR request_url LIKE '%.be%' OR
+          request_url LIKE '%.at%' OR
+          request_url LIKE '%.jp%' OR request_url LIKE '%.cn%' OR request_url LIKE '%.in%' OR
+          request_url LIKE '%.kr%' OR request_url LIKE '%.sg%' OR request_url LIKE '%.th%' OR
+          request_url LIKE '%.ae%' OR request_url LIKE '%.my%' OR request_url LIKE '%.ph%' OR
+          request_url LIKE '%.il%' OR
+          request_url LIKE '%.za%' OR request_url LIKE '%.ng%' OR request_url LIKE '%.eg%' OR
+          request_url LIKE '%.ke%' OR request_url LIKE '%.ma%' OR request_url LIKE '%.gh%' OR
+          request_url LIKE '%.tz%' OR request_url LIKE '%.ug%' OR request_url LIKE '%.sn%' OR
+          request_url LIKE '%.tn%' OR
+          request_url LIKE '%.us%' OR request_url LIKE '%.ca%' OR request_url LIKE '%.mx%' OR
+          request_url LIKE '%.gt%' OR request_url LIKE '%.cr%' OR request_url LIKE '%.pa%' OR
+          request_url LIKE '%.do%' OR request_url LIKE '%.hn%' OR request_url LIKE '%.sv%' OR
+          request_url LIKE '%.ni%' OR
+          request_url LIKE '%.br%' OR request_url LIKE '%.ar%' OR request_url LIKE '%.cl%' OR
+          request_url LIKE '%.pe%' OR request_url LIKE '%.co%' OR request_url LIKE '%.ve%' OR
+          request_url LIKE '%.bo%' OR request_url LIKE '%.ec%' OR request_url LIKE '%.py%' OR
+          request_url LIKE '%.uy%' OR
+          request_url LIKE '%.au%' OR request_url LIKE '%.nz%' OR request_url LIKE '%.ws%' OR
+          request_url LIKE '%.to%' OR request_url LIKE '%.nu%' OR request_url LIKE '%.pw%' OR
+          request_url LIKE '%.fm%' OR request_url LIKE '%.tv%'
+      )
+) t
+ORDER BY continent, country, request_duration DESC;
