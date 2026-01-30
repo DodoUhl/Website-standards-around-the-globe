@@ -5,12 +5,13 @@ import matplotlib.pyplot as plt
 # -----------------------------
 # CSVs einlesen
 # -----------------------------
-request_path = Path("../../csv/h_files/request_duration.csv")
+request_path = Path("../../csv/h_files/request_duration.csv.gz")
 charts_path = Path("../../charts/h_files")
 charts_path.mkdir(parents=True, exist_ok=True)
 
 df_request = pd.read_csv(
     request_path, 
+    compression="gzip",
     header=None,
     names=['continent', 'country', 'request_url', 'request_duration']
 )
