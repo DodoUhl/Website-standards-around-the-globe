@@ -1,0 +1,145 @@
+SELECT
+    continent,
+    country,
+    url,
+    page_timing_content_load,
+    page_timing_load
+FROM (
+    SELECT
+        url,
+	page_timing_content_load,
+        page_timing_load,
+        CASE
+            -- Europa
+            WHEN url LIKE '%.de%' THEN 'Deutschland'
+            WHEN url LIKE '%.fr%' THEN 'Frankreich'
+            WHEN url LIKE '%.uk%' THEN 'UK'
+            WHEN url LIKE '%.it%' THEN 'Italien'
+            WHEN url LIKE '%.es%' THEN 'Spanien'
+            WHEN url LIKE '%.nl%' THEN 'Niederlande'
+            WHEN url LIKE '%.pl%' THEN 'Polen'
+            WHEN url LIKE '%.se%' THEN 'Schweden'
+            WHEN url LIKE '%.be%' THEN 'Belgien'
+            WHEN url LIKE '%.at%' THEN 'Österreich'
+
+            -- Asien
+            WHEN url LIKE '%.jp%' THEN 'Japan'
+            WHEN url LIKE '%.cn%' THEN 'China'
+            WHEN url LIKE '%.in%' THEN 'Indien'
+            WHEN url LIKE '%.kr%' THEN 'Südkorea'
+            WHEN url LIKE '%.sg%' THEN 'Singapur'
+            WHEN url LIKE '%.th%' THEN 'Thailand'
+            WHEN url LIKE '%.ae%' THEN 'VAE'
+            WHEN url LIKE '%.my%' THEN 'Malaysia'
+            WHEN url LIKE '%.ph%' THEN 'Philippinen'
+            WHEN url LIKE '%.il%' THEN 'Israel'
+
+            -- Afrika
+            WHEN url LIKE '%.za%' THEN 'Südafrika'
+            WHEN url LIKE '%.ng%' THEN 'Nigeria'
+            WHEN url LIKE '%.eg%' THEN 'Ägypten'
+            WHEN url LIKE '%.ke%' THEN 'Kenia'
+            WHEN url LIKE '%.ma%' THEN 'Marokko'
+            WHEN url LIKE '%.gh%' THEN 'Ghana'
+            WHEN url LIKE '%.tz%' THEN 'Tansania'
+            WHEN url LIKE '%.ug%' THEN 'Uganda'
+            WHEN url LIKE '%.sn%' THEN 'Senegal'
+            WHEN url LIKE '%.tn%' THEN 'Tunesien'
+
+            -- Nordamerika
+            WHEN url LIKE '%.us%' THEN 'USA'
+            WHEN url LIKE '%.ca%' THEN 'Kanada'
+            WHEN url LIKE '%.mx%' THEN 'Mexiko'
+            WHEN url LIKE '%.gt%' THEN 'Guatemala'
+            WHEN url LIKE '%.cr%' THEN 'Costa Rica'
+            WHEN url LIKE '%.pa%' THEN 'Panama'
+            WHEN url LIKE '%.do%' THEN 'Dominikanische Republik'
+            WHEN url LIKE '%.hn%' THEN 'Honduras'
+            WHEN url LIKE '%.sv%' THEN 'El Salvador'
+            WHEN url LIKE '%.ni%' THEN 'Nicaragua'
+
+            -- Südamerika
+            WHEN url LIKE '%.br%' THEN 'Brasilien'
+            WHEN url LIKE '%.ar%' THEN 'Argentinien'
+            WHEN url LIKE '%.cl%' THEN 'Chile'
+            WHEN url LIKE '%.pe%' THEN 'Peru'
+            WHEN url LIKE '%.co%' THEN 'Kolumbien'
+            WHEN url LIKE '%.ve%' THEN 'Venezuela'
+            WHEN url LIKE '%.bo%' THEN 'Bolivien'
+            WHEN url LIKE '%.ec%' THEN 'Ecuador'
+            WHEN url LIKE '%.py%' THEN 'Paraguay'
+            WHEN url LIKE '%.uy%' THEN 'Uruguay'
+
+            -- Ozeanien
+            WHEN url LIKE '%.au%' THEN 'Australien'
+            WHEN url LIKE '%.nz%' THEN 'Neuseeland'
+            WHEN url LIKE '%.ws%' THEN 'Samoa'
+            WHEN url LIKE '%.to%' THEN 'Tonga'
+            WHEN url LIKE '%.nu%' THEN 'Niue'
+            WHEN url LIKE '%.pw%' THEN 'Palau'
+            WHEN url LIKE '%.fm%' THEN 'Mikronesien'
+            WHEN url LIKE '%.tv%' THEN 'Tuvalu'
+
+            ELSE 'Unbekannt'
+        END AS country,
+        CASE
+            WHEN url LIKE '%.de%' OR url LIKE '%.fr%' OR url LIKE '%.uk%' OR
+                 url LIKE '%.it%' OR url LIKE '%.es%' OR url LIKE '%.nl%' OR
+                 url LIKE '%.pl%' OR url LIKE '%.se%' OR url LIKE '%.be%' OR
+                 url LIKE '%.at%' THEN 'Europa'
+
+            WHEN url LIKE '%.jp%' OR url LIKE '%.cn%' OR url LIKE '%.in%' OR
+                 url LIKE '%.kr%' OR url LIKE '%.sg%' OR url LIKE '%.th%' OR
+                 url LIKE '%.ae%' OR url LIKE '%.my%' OR url LIKE '%.ph%' OR
+                 url LIKE '%.il%' THEN 'Asien'
+
+            WHEN url LIKE '%.za%' OR url LIKE '%.ng%' OR url LIKE '%.eg%' OR
+                 url LIKE '%.ke%' OR url LIKE '%.ma%' OR url LIKE '%.gh%' OR
+                 url LIKE '%.tz%' OR url LIKE '%.ug%' OR url LIKE '%.sn%' OR
+                 url LIKE '%.tn%' THEN 'Afrika'
+
+            WHEN url LIKE '%.us%' OR url LIKE '%.ca%' OR url LIKE '%.mx%' OR
+                 url LIKE '%.gt%' OR url LIKE '%.cr%' OR url LIKE '%.pa%' OR
+                 url LIKE '%.do%' OR url LIKE '%.hn%' OR url LIKE '%.sv%' OR
+                 url LIKE '%.ni%' THEN 'Nordamerika'
+
+            WHEN url LIKE '%.br%' OR url LIKE '%.ar%' OR url LIKE '%.cl%' OR
+                 url LIKE '%.pe%' OR url LIKE '%.co%' OR url LIKE '%.ve%' OR
+                 url LIKE '%.bo%' OR url LIKE '%.ec%' OR url LIKE '%.py%' OR
+                 url LIKE '%.uy%' THEN 'Südamerika'
+
+            WHEN url LIKE '%.au%' OR url LIKE '%.nz%' OR url LIKE '%.ws%' OR
+                 url LIKE '%.to%' OR url LIKE '%.nu%' OR url LIKE '%.pw%' OR
+                 url LIKE '%.fm%' OR url LIKE '%.tv%' THEN 'Ozeanien'
+
+            ELSE 'Unbekannt'
+        END AS continent
+    FROM "browser-crawler"."crawls"
+    WHERE page_timing_content_load != -1
+      AND (
+          url LIKE '%.de%' OR url LIKE '%.fr%' OR url LIKE '%.uk%' OR
+          url LIKE '%.it%' OR url LIKE '%.es%' OR url LIKE '%.nl%' OR
+          url LIKE '%.pl%' OR url LIKE '%.se%' OR url LIKE '%.be%' OR
+          url LIKE '%.at%' OR
+          url LIKE '%.jp%' OR url LIKE '%.cn%' OR url LIKE '%.in%' OR
+          url LIKE '%.kr%' OR url LIKE '%.sg%' OR url LIKE '%.th%' OR
+          url LIKE '%.ae%' OR url LIKE '%.my%' OR url LIKE '%.ph%' OR
+          url LIKE '%.il%' OR
+          url LIKE '%.za%' OR url LIKE '%.ng%' OR url LIKE '%.eg%' OR
+          url LIKE '%.ke%' OR url LIKE '%.ma%' OR url LIKE '%.gh%' OR
+          url LIKE '%.tz%' OR url LIKE '%.ug%' OR url LIKE '%.sn%' OR
+          url LIKE '%.tn%' OR
+          url LIKE '%.us%' OR url LIKE '%.ca%' OR url LIKE '%.mx%' OR
+          url LIKE '%.gt%' OR url LIKE '%.cr%' OR url LIKE '%.pa%' OR
+          url LIKE '%.do%' OR url LIKE '%.hn%' OR url LIKE '%.sv%' OR
+          url LIKE '%.ni%' OR
+          url LIKE '%.br%' OR url LIKE '%.ar%' OR url LIKE '%.cl%' OR
+          url LIKE '%.pe%' OR url LIKE '%.co%' OR url LIKE '%.ve%' OR
+          url LIKE '%.bo%' OR url LIKE '%.ec%' OR url LIKE '%.py%' OR
+          url LIKE '%.uy%' OR
+          url LIKE '%.au%' OR url LIKE '%.nz%' OR url LIKE '%.ws%' OR
+          url LIKE '%.to%' OR url LIKE '%.nu%' OR url LIKE '%.pw%' OR
+          url LIKE '%.fm%' OR url LIKE '%.tv%'
+      )
+) t
+ORDER BY continent, country DESC;
