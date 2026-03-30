@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 # -----------------------------
 # CSVs einlesen
 # -----------------------------
-request_path = Path("../../csv/h_files/request_duration.csv.gz")
-charts_path = Path("../../charts/h_files")
+request_path = Path("../../csv/har_files/request_duration.csv.gz")
+charts_path = Path("../../charts/har_files")
 charts_path.mkdir(parents=True, exist_ok=True)
 
 df_request = pd.read_csv(
@@ -24,6 +24,7 @@ agg_country = df_request.groupby(['continent', 'country'], as_index=False).agg(
     count=('request_duration', 'count')
 )
 
+agg_country = agg_country[agg_country['count'] > 30]
 country_labels = {row['country']: f"{row['country']} ({row['count']})" for _, row in agg_country.iterrows()}
 data = agg_country.set_index('country')['avg_request_duration'].sort_values(ascending=False)
 

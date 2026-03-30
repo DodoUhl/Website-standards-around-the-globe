@@ -2,13 +2,13 @@ SELECT
     continent,
     country,
     url,
-    page_timing_content_load,
-    page_timing_load
+    dom_size,
+    screenshot_size
 FROM (
     SELECT
         url,
-        page_timing_content_load,
-        page_timing_load,
+        dom_size,
+        screenshot_size,
         CASE
             -- Europa
             WHEN url LIKE '%.de' THEN 'Deutschland'
@@ -115,7 +115,7 @@ FROM (
             ELSE 'Unbekannt'
         END AS continent
     FROM "browser-crawler"."crawls"
-    WHERE page_timing_content_load != -1
+    WHERE screenshot_size != -1
       AND (
           url LIKE '%.de' OR url LIKE '%.fr' OR url LIKE '%.uk' OR
           url LIKE '%.it' OR url LIKE '%.es' OR url LIKE '%.nl' OR
@@ -137,7 +137,7 @@ FROM (
           url LIKE '%.pe' OR url LIKE '%.co' OR url LIKE '%.ve' OR
           url LIKE '%.bo' OR url LIKE '%.ec' OR url LIKE '%.py' OR
           url LIKE '%.uy' OR
-          url LIKE '%.au' OR url LIKE '%.nz' OR url LIKE '%.ws' OR                
+          url LIKE '%.au' OR url LIKE '%.nz' OR url LIKE '%.ws' OR
           url LIKE '%.to' OR url LIKE '%.nu' OR url LIKE '%.pw' OR
           url LIKE '%.fm' OR url LIKE '%.tv'
       )
