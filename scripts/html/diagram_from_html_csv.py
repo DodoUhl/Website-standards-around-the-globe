@@ -1,6 +1,21 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 from pathlib import Path
+
+# Farbzuordnung pro Kontinent
+continent_colors = {
+    'Europa': '#0086D1',
+    'Asien': '#FFB000',
+    'Nordamerika': '#00B894',
+    'Südamerika': '#FF6F00',
+    'Afrika': '#E84393',
+    'Ozeanien': '#00AEEF',
+    'Organisation': '#6C5CE7',   
+    'Commercial': '#D63031',  
+    'Network': '#2D3436',
+    'Government': '#2E7D32'
+}
 
 # -----------------------------
 # Pfade
@@ -24,6 +39,14 @@ df = df[df["downloaded_HTML_size"] >= 10000]
 # downloaded_HTML_size -> KiB
 # -----------------------------
 df["downloaded_HTML_size_kib"] = df["downloaded_HTML_size"] / 1024
+
+# -----------------------------
+# TLD zu Land
+# -----------------------------
+df["tld"] = df["domain"].str.extract(r'(\.[a-z]{2,})$')
+tld_per_country = df.groupby("country")["tld"] \
+    .agg(lambda x: x.value_counts().idxmax()) \
+    .to_dict()
 
 # -----------------------------
 # Metriken (für Diagramme)
@@ -56,23 +79,37 @@ country_avg = df.groupby("country")[metrics].mean()
 country_count = df.groupby("country").size()
 
 country_labels = {
-    c: f"{c} ({country_count[c]})"
+    c: f"{c}({tld_per_country.get(c,'')}) ({country_count[c]})"
     for c in country_avg.index
 }
+country_to_continent = df.drop_duplicates("country").set_index("country")["continent"].to_dict()
 
+colors = [
+    continent_colors.get(country_to_continent[c], "gray")
+    for c in country_avg.index
+]
+used_continents = set(country_to_continent.values())
+
+handles = [
+    mpatches.Patch(color=continent_colors[c], label=c)
+    for c in used_continents
+]
 for metric in metrics:
     data = country_avg[metric].sort_values(ascending=False)
+    colors = [
+    continent_colors.get(country_to_continent[c], "gray")
+    for c in data.index
+    ]
 
     plt.figure(figsize=(10, 10))
-    plt.barh(y=[country_labels[c] for c in data.index], width=data.values)
-
+    plt.barh(y=[country_labels[c] for c in data.index], width=data.values, color=colors)
     plt.xlabel(metric_labels[metric])
     plt.ylabel("Country")
     plt.title(
         f"Average {metric_labels[metric]} per Country"
     )
-
     plt.gca().invert_yaxis()
+    plt.legend(handles=handles, title="Continent")
     plt.tight_layout()
     plt.savefig(charts_path / f"html_avg_country_{metric}.png")
     plt.close()

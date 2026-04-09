@@ -2,12 +2,12 @@ SELECT
     continent,
     country,
     main_domain AS url,
-    number_of_packages,
+    number_of_requests,
     number_of_dependencies
 FROM (
     SELECT
         m.main_domain,
-        COUNT(*) AS number_of_packages,
+        COUNT(*) AS number_of_requests,
         COUNT(DISTINCT
             CASE 
                 WHEN domain(e.request_url) != m.main_domain THEN domain(e.request_url)
@@ -111,4 +111,4 @@ FROM (
     ON e.log_id = m.log_id
     GROUP BY m.main_domain
 ) t
-ORDER BY continent, country DESC, number_of_packages DESC;
+ORDER BY continent, country DESC, number_of_requests DESC;

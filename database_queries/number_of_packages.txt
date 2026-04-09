@@ -1,0 +1,99 @@
+SELECT
+    continent,
+    country,
+    main_domain AS url,
+    number_of_packages
+FROM (
+    SELECT
+	domain(argMin(request_url, entry_id)) AS main_domain,
+    	COUNT(DISTINCT entry_id) AS number_of_packages,
+	-- Länder basierend auf echter TLD
+        CASE
+            -- Europa
+            WHEN endsWith(main_domain, '.de') THEN 'Deutschland'
+            WHEN endsWith(main_domain, '.fr') THEN 'Frankreich'
+            WHEN endsWith(main_domain, '.uk') THEN 'UK'
+            WHEN endsWith(main_domain, '.it') THEN 'Italien'
+            WHEN endsWith(main_domain, '.es') THEN 'Spanien'
+            WHEN endsWith(main_domain, '.nl') THEN 'Niederlande'
+            WHEN endsWith(main_domain, '.pl') THEN 'Polen'
+            WHEN endsWith(main_domain, '.se') THEN 'Schweden'
+            WHEN endsWith(main_domain, '.be') THEN 'Belgien'
+            WHEN endsWith(main_domain, '.at') THEN 'Österreich'
+
+            -- Asien
+            WHEN endsWith(main_domain, '.jp') THEN 'Japan'
+            WHEN endsWith(main_domain, '.cn') THEN 'China'
+            WHEN endsWith(main_domain, '.in') THEN 'Indien'
+            WHEN endsWith(main_domain, '.kr') THEN 'Südkorea'
+            WHEN endsWith(main_domain, '.sg') THEN 'Singapur'
+            WHEN endsWith(main_domain, '.th') THEN 'Thailand'
+            WHEN endsWith(main_domain, '.ae') THEN 'VAE'
+            WHEN endsWith(main_domain, '.my') THEN 'Malaysia'
+            WHEN endsWith(main_domain, '.ph') THEN 'Philippinen'
+            WHEN endsWith(main_domain, '.il') THEN 'Israel'
+
+            -- Afrika
+            WHEN endsWith(main_domain, '.za') THEN 'Südafrika'
+            WHEN endsWith(main_domain, '.ng') THEN 'Nigeria'
+            WHEN endsWith(main_domain, '.eg') THEN 'Ägypten'
+            WHEN endsWith(main_domain, '.ke') THEN 'Kenia'
+            WHEN endsWith(main_domain, '.ma') THEN 'Marokko'
+            WHEN endsWith(main_domain, '.gh') THEN 'Ghana'
+            WHEN endsWith(main_domain, '.tz') THEN 'Tansania'
+            WHEN endsWith(main_domain, '.ug') THEN 'Uganda'
+            WHEN endsWith(main_domain, '.sn') THEN 'Senegal'
+            WHEN endsWith(main_domain, '.tn') THEN 'Tunesien'
+
+            -- Nordamerika
+            WHEN endsWith(main_domain, '.us') THEN 'USA'
+            WHEN endsWith(main_domain, '.ca') THEN 'Kanada'
+            WHEN endsWith(main_domain, '.mx') THEN 'Mexiko'
+            WHEN endsWith(main_domain, '.gt') THEN 'Guatemala'
+            WHEN endsWith(main_domain, '.cr') THEN 'Costa Rica'
+            WHEN endsWith(main_domain, '.pa') THEN 'Panama'
+            WHEN endsWith(main_domain, '.do') THEN 'Dominikanische Republik'
+            WHEN endsWith(main_domain, '.hn') THEN 'Honduras'
+            WHEN endsWith(main_domain, '.sv') THEN 'El Salvador'
+            WHEN endsWith(main_domain, '.ni') THEN 'Nicaragua'
+
+            -- Südamerika
+            WHEN endsWith(main_domain, '.br') THEN 'Brasilien'
+            WHEN endsWith(main_domain, '.ar') THEN 'Argentinien'
+            WHEN endsWith(main_domain, '.cl') THEN 'Chile'
+            WHEN endsWith(main_domain, '.pe') THEN 'Peru'
+            WHEN endsWith(main_domain, '.co') THEN 'Kolumbien'
+            WHEN endsWith(main_domain, '.ve') THEN 'Venezuela'
+            WHEN endsWith(main_domain, '.bo') THEN 'Bolivien'
+            WHEN endsWith(main_domain, '.ec') THEN 'Ecuador'
+            WHEN endsWith(main_domain, '.py') THEN 'Paraguay'
+            WHEN endsWith(main_domain, '.uy') THEN 'Uruguay'
+
+            -- Ozeanien
+            WHEN endsWith(main_domain, '.au') THEN 'Australien'
+            WHEN endsWith(main_domain, '.nz') THEN 'Neuseeland'
+            WHEN endsWith(main_domain, '.ws') THEN 'Samoa'
+            WHEN endsWith(main_domain, '.to') THEN 'Tonga'
+            WHEN endsWith(main_domain, '.nu') THEN 'Niue'
+            WHEN endsWith(main_domain, '.pw') THEN 'Palau'
+            WHEN endsWith(main_domain, '.fm') THEN 'Mikronesien'
+            WHEN endsWith(main_domain, '.tv') THEN 'Tuvalu'
+
+            ELSE 'Unbekannt'
+        END AS country,
+
+        -- Kontinent basierend auf Country
+        CASE
+            WHEN country IN ('Deutschland','Frankreich','UK','Italien','Spanien','Niederlande','Polen','Schweden','Belgien','Österreich') THEN 'Europa'
+            WHEN country IN ('Japan','China','Indien','Südkorea','Singapur','Thailand','VAE','Malaysia','Philippinen','Israel') THEN 'Asien'
+            WHEN country IN ('Südafrika','Nigeria','Ägypten','Kenia','Marokko','Ghana','Tansania','Uganda','Senegal','Tunesien') THEN 'Afrika'
+            WHEN country IN ('USA','Kanada','Mexiko','Guatemala','Costa Rica','Panama','Dominikanische Republik','Honduras','El Salvador','Nicaragua') THEN 'Nordamerika'
+            WHEN country IN ('Brasilien','Argentinien','Chile','Peru','Kolumbien','Venezuela','Bolivien','Ecuador','Paraguay','Uruguay') THEN 'Südamerika'
+            WHEN country IN ('Australien','Neuseeland','Samoa','Tonga','Niue','Palau','Mikronesien','Tuvalu') THEN 'Ozeanien'
+            ELSE 'Unbekannt'
+        END AS continent
+
+    FROM "browser-crawler"."har_entries"
+    WHERE response_status = 200
+GROUP BY log_id)
+ORDER BY continent, country DESC, number_of_packages DESC;
