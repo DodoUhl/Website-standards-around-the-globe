@@ -46,8 +46,8 @@ grouped = (
     df.groupby("country")
     .agg(
         avg_size_kib=("size_kib", "mean"),
-        avg_width=("height_px", "mean"),
-        avg_height=("width_px", "mean"),
+        avg_width=("width_px", "mean"),
+        avg_height=("height_px", "mean"),
         avg_density=("image_density", "mean"),
         count=("domain", "count")
     )
